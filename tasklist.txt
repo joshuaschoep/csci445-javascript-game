@@ -5,6 +5,10 @@ CSCI445 JavaScript Task List
 	- Start/stop(?) game
 	- Something keeping track of score
 	- Scoreboard(?)
+	- Needs 3 CSS3 features
+		- Button changes on hover/something?
+		- Animated title?
+		- Animation for advancing a level?
 - Spaceship
 	- Cool sprite
 	- Keyboard movement
@@ -23,3 +27,5 @@ CSCI445 JavaScript Task List
 	- Interactions with spaceship, lasers
 - Bonus point items
 	- Same as asteroids
+- Implement High Score API
+	- High Score table displayed on page
