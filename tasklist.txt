@@ -1,0 +1,25 @@
+CSCI445 JavaScript Task List
+
+- Page layout
+	- Canvas
+	- Start/stop(?) game
+	- Something keeping track of score
+	- Scoreboard(?)
+- Spaceship
+	- Cool sprite
+	- Keyboard movement
+	- Drift controls?
+	- Has x num of lives that get taken away when hit blasteroid
+- Spaceship shoots lasers
+	- Laser/asteroid interaction
+	- Laser sprite
+- Level structure
+	- Keep track of scores
+	- When to advance to next level
+	- Generating asteroids
+- Asteroids
+	- How generated (random, etc)
+	- Sprite
+	- Interactions with spaceship, lasers
+- Bonus point items
+	- Same as asteroids
