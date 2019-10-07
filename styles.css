@@ -26,4 +26,5 @@ canvas#game-window{
     margin: auto;
     padding-top: 30px;
     display: block;
+    border: 1px solid black;
 }
