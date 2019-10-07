@@ -1,31 +1,32 @@
 CSCI445 JavaScript Task List
 
-- Page layout
+1. Page layout
 	- Canvas
 	- Start/stop(?) game
 	- Something keeping track of score
 	- Scoreboard(?)
 	- Needs 3 CSS3 features
 		- Button changes on hover/something?
+			- We have nice sprites for buttons if we want
 		- Animated title?
 		- Animation for advancing a level?
-- Spaceship
-	- Cool sprite
-	- Keyboard movement
-	- Drift controls?
-	- Has x num of lives that get taken away when hit blasteroid
-- Spaceship shoots lasers
-	- Laser/asteroid interaction
-	- Laser sprite
-- Level structure
+2. Level structure
 	- Keep track of scores
 	- When to advance to next level
 	- Generating asteroids
-- Asteroids
+3. Asteroids
 	- How generated (random, etc)
-	- Sprite
+	- Sprite (SR)
 	- Interactions with spaceship, lasers
-- Bonus point items
+3. Bonus point items
 	- Same as asteroids
-- Implement High Score API
+3. Spaceship
+	- Cool sprite (SR)
+	- Keyboard movement
+	- Drift controls?
+	- Has x num of lives that get taken away when hit blasteroid
+4. Spaceship shoots lasers
+	- Laser/asteroid interaction
+	- Laser sprite (SR)
+5. Implement High Score API
 	- High Score table displayed on page
