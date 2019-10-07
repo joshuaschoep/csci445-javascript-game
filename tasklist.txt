@@ -5,11 +5,14 @@ CSCI445 JavaScript Task List
 	- Start/stop(?) game
 	- Something keeping track of score
 	- Scoreboard(?)
-- Spaceship Sprite
+- Spaceship
+	- Cool sprite
 	- Keyboard movement
 	- Drift controls?
+	- Has x num of lives that get taken away when hit blasteroid
 - Spaceship shoots lasers
 	- Laser/asteroid interaction
+	- Laser sprite
 - Level structure
 	- Keep track of scores
 	- When to advance to next level
