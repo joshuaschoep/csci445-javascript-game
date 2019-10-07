@@ -3,11 +3,16 @@
     padding: 0;
 }
 
+html{
+    background-color: #000;
+}
+
 h1{
     font-family: monospace;
     float: left;
     padding: 10px;
     font-size: 30px;
+    color: #fff;
 }
 
 h2{
@@ -16,6 +21,7 @@ h2{
     float: right;
     padding: 20px;
     font-size: 18px;
+    color: #fff;
 }
 
 canvas#game-window{
@@ -26,5 +32,5 @@ canvas#game-window{
     margin: auto;
     padding-top: 30px;
     display: block;
-    border: 1px solid black;
+    border: 1px solid #fff;
 }
