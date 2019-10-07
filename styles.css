@@ -7,6 +7,12 @@ html{
     background-color: #000;
 }
 
+body{
+    margin: auto;
+    display: block;
+    width: 1240px;
+}
+
 h1{
     font-family: monospace;
     float: left;
@@ -24,12 +30,24 @@ h2{
     color: #fff;
 }
 
+section.game{
+    clear: both;
+    padding: 50px;
+}
+
 canvas#game-window{
-    width: 95vw;
-    height: 80vh;
-    min-width: 640px;
-    min-height: 480px;
-    margin: auto;
+    float: left;
+    width: 640px;
+    height: 640px;
+    padding-top: 30px;
+    display: block;
+    border: 1px solid #fff;
+}
+
+#scoreboard-window{
+    float: right;
+    width: 480px;
+    height: 640px;
     padding-top: 30px;
     display: block;
     border: 1px solid #fff;
