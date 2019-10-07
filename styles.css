@@ -1,3 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 h1{
+    font-family: monospace;
+    float: left;
+    padding: 10px;
+    font-size: 30px;
+}
+
+h2{
     font-family: Arial, sans-serif;
+    font-weight: 400;
+    float: right;
+    padding: 20px;
+    font-size: 18px;
+}
+
+canvas#game-window{
+    width: 95vw;
+    height: 80vh;
+    min-width: 640px;
+    min-height: 480px;
+    margin: auto;
+    padding-top: 30px;
+    display: block;
+    border: 1px solid black;
 }
