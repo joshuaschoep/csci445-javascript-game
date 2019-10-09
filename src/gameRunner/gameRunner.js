@@ -1,53 +1,51 @@
 // import { Ship } from './src/spaceship/spaceship.js';
 // const Ship = require('./src/spaceship/spaceship.js');
+const canvas = document.getElementById("game-window");
+const context = canvas.getContext("2d");
 
-
-window.onload = function() {
-
-    var canvas = document.getElementById("game-window");
-    var context = canvas.getContext("2d");
-
-    canvas_width = canvas.width;
-    canvas_height = canvas.height;
+window.onload = function () {
+    let canvas_width = canvas.width;
+    let canvas_height = canvas.height;
 
     ship = new Ship(canvas_width / 2 - 15, canvas_height - 50, canvas, context);
     this.ship.initDraw();
 
-    window.addEventListener("keydown", function() {
+    window.addEventListener("keydown", function () {
         keydown_handler(event, ship);
     }, false);
 
+    update_scores();
     this.drawLoop(ship);
 };
 
 function drawLoop(ship) {
 
     // console.log("(2): " + ship.getContext());
-    ship.getContext().clearRect(0, 0, 700, 700); // This should probably just be a generic context
+    context.clearRect(0, 0, 700, 700); // This should probably just be a generic context
     ship.draw();
-    setTimeout(function() {
+    setTimeout(function () {
         drawLoop(ship);
     }, 30);
 }
 
 function keydown_handler(event, ship) {
     // down arrow
-    if (event.keyCode == 40) {
+    if (event.keyCode === 40) {
         ship.moveDown();
         ship.draw();
     }
     // up arrow
-    if (event.keyCode == 38) {
+    if (event.keyCode === 38) {
         ship.moveUp();
         ship.draw();
     }
     // right arrow
-    if (event.keyCode == 39) {
+    if (event.keyCode === 39) {
         ship.moveRight();
         ship.draw();
     }
     // left arrow
-    if (event.keyCode == 37) {
+    if (event.keyCode === 37) {
         ship.moveLeft();
         ship.draw();
     }
@@ -86,7 +84,7 @@ class Ship {
         var _ship_height = this.SHIP_HEIGHT;
         var _ship_width = this.SHIP_WIDTH;
 
-        this.shipImg.addEventListener("load", function() {
+        this.shipImg.addEventListener("load", function () {
 
             // console.log("Vars:");
             // console.log(_xLoc);
@@ -140,5 +138,18 @@ class Ship {
             // console.log("Changing yLoc");
             this.yLoc = this.yLoc + 5;
         }
+    }
+}
+
+class Asteroid {
+    constructor(vY, xPos, yPos) {
+        this.vY = vY;
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }
+
+    draw() {
+        context.clearRect(this.xPos, this.yPos, 20, 20);
+        context.drawImage(asteroidImg, this.xPos, this.yPos + this.vY, ASTEROID_WIDTH, ASTEROID_HEIGHT);
     }
 }
