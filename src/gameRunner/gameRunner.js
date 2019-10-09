@@ -4,31 +4,20 @@
 
 window.onload = function() {
 
-    // this.console.log("hell");
     var canvas = document.getElementById("game-window");
     var context = canvas.getContext("2d");
 
     canvas_width = canvas.width;
     canvas_height = canvas.height;
 
-    // this.console.log(canvas_width);
-    // this.console.log(canvas_height);
-
-
-
-
     ship = new Ship(canvas_width / 2 - 15, canvas_height - 50, canvas, context);
-    // this.console.log("Created ship");
     this.ship.initDraw();
-    // console.log("(1): " + ship.getContext());
 
     window.addEventListener("keydown", function() {
         keydown_handler(event, ship);
     }, false);
 
     this.drawLoop(ship);
-    // console.log("aaaa");
-    ship.context.clearRect(0, 0, 700, 700);
 };
 
 function drawLoop(ship) {
