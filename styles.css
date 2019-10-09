@@ -39,7 +39,7 @@ canvas#game-window{
     float: left;
     width: 640px;
     height: 640px;
-    padding-top: 30px;
+    /* padding-top: 30px; Simon Got rid of b/c not really sure why */
     display: block;
     border: 1px solid #fff;
 }
