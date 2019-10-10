@@ -1,10 +1,13 @@
 // import { Ship } from './src/spaceship/spaceship.js';
 // const Ship = require('./src/spaceship/spaceship.js');
-canvas = document.getElementById("game-window");
-context = canvas.getContext("2d");
-var level = 0;
+// canvas = document.getElementById("game-window");
+// context = canvas.getContext("2d");
+// var level = 0;
 
 window.onload = function() {
+    canvas = document.getElementById("game-window");
+    context = canvas.getContext("2d");
+    
     canvas_width = canvas.width;
     canvas_height = canvas.height;
 
@@ -15,13 +18,13 @@ window.onload = function() {
         keydown_handler(event, ship);
     }, false);
 
-    update_scores();
+    // update_scores();
     this.drawLoop(ship);
 };
 
 function drawLoop(ship) {
 
-    // console.log("(2): " + ship.getContext());
+    console.log("(2): " + ship.getContext());
     context.clearRect(0, 0, 700, 700); // This should probably just be a generic context
     ship.draw();
     setTimeout(function () {
@@ -142,15 +145,15 @@ class Ship {
     }
 }
 
-class Asteroid {
-    constructor(vY, xPos, yPos) {
-        this.vY = vY;
-        this.xPos = xPos;
-        this.yPos = yPos;
-    }
-
-    draw() {
-        context.clearRect(this.xPos, this.yPos, 20, 20);
-        context.drawImage(asteroidImg, this.xPos, this.yPos + this.vY, ASTEROID_WIDTH, ASTEROID_HEIGHT);
-    }
-}
+// class Asteroid {
+//     constructor(vY, xPos, yPos) {
+//         this.vY = vY;
+//         this.xPos = xPos;
+//         this.yPos = yPos;
+//     }
+//
+//     draw() {
+//         context.clearRect(this.xPos, this.yPos, 20, 20);
+//         context.drawImage(asteroidImg, this.xPos, this.yPos + this.vY, ASTEROID_WIDTH, ASTEROID_HEIGHT);
+//     }
+// }
