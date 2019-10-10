@@ -1,4 +1,4 @@
-// import { Ship } from './src/spaceship/spaceship.js';
+//import { Ship } from './src/spaceship/spaceship.js';
 // const Ship = require('./src/spaceship/spaceship.js');
 const canvas = document.getElementById("game-window");
 const context = canvas.getContext("2d");

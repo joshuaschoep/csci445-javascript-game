@@ -1,4 +1,4 @@
-class Ship {
+export class Ship {
     xLoc;
     yLoc;
     canvas;
@@ -22,7 +22,7 @@ class Ship {
     }
 
     initDraw() {
-        // console.log("initDraw()");
+        // .log("initDraw()");
         // need to do this b/c the eventListenere. idk why
         var _xLoc = this.xLoc;
         var _yLoc = this.yLoc;
@@ -31,7 +31,7 @@ class Ship {
         var _ship_height = this.SHIP_HEIGHT;
         var _ship_width = this.SHIP_WIDTH;
 
-        this.shipImg.addEventListener("load", function() {
+        this.shipImg.addEventListener("load", function () {
 
             // console.log("Vars:");
             // console.log(_xLoc);
@@ -48,8 +48,8 @@ class Ship {
     }
 
     draw() {
-        console.log("draw()");
-        console.log("draw context: " + this.context);
+        // console.log("draw()");
+        // console.log("draw context: " + this.context);
         // this.context.clearRect(0,0,700,700);
         this.context.drawImage(
             this.shipImg, this.xLoc, this.yLoc, this.SHIP_WIDTH, this.SHIP_HEIGHT
@@ -57,37 +57,33 @@ class Ship {
     }
 
     moveRight() {
-        console.log("moveRight");
+        // console.log("moveRight");
         if (this.xLoc <= this.canvas.width - this.SHIP_WIDTH) {
             this.xLoc = this.xLoc + 5;
-            //draw();
         }
     }
 
     moveLeft() {
-        console.log("moveLeft");
+        // console.log("moveLeft");
         if (this.xLoc > -5) {
             this.xLoc = this.xLoc - 5;
-            //draw();
         }
     }
 
     moveUp() {
-        console.log("moveUp");
+        // console.log("moveUp");
         if (this.yLoc > 0) {
-            console.log("Changing yLoc");
+            // console.log("Changing yLoc");
             this.yLoc = this.yLoc - 5;
-            //draw();
         }
     }
 
     moveDown() {
-        console.log("moveDown");
-        console.log("Canvas height: " + this.canvas.height);
+        // console.log("moveDown");
+        // console.log("Canvas height: " + this.canvas.height);
         if (this.yLoc < this.canvas.height - this.SHIP_HEIGHT) {
-            console.log("Changing yLoc");
+            // console.log("Changing yLoc");
             this.yLoc = this.yLoc + 5;
-            //draw();
         }
     }
 }
