@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="highscore.css">
+    <script type="text/javascript" src="src/HighscoreAPI.js"></script>
 </head>
 
 <body>
@@ -13,7 +15,25 @@
     <h2>A game for all computer scientists</h2>
     <section class="game">
         <canvas id="game-window"></canvas>
-        <div id="scoreboard-window"></div>
+        <div id="scoreboard-window">
+            <div id="highdiv">
+                <table id="hightable">
+                    <tr>
+                        <th>User</th>
+                        <th>Score</th>
+                    </tr>
+
+                </table>
+                <table id="myhightable">
+                    <tr>
+                        <th colspan="2">Your High Score</th>
+                    </tr>
+                    <tr id="myhighscore">
+                        <td colspan="2">You don't have one yet!</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </section>
     <script src="./src/gameRunner/gameRunner.js"></script>
 </body>
