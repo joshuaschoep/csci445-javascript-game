@@ -7,7 +7,7 @@
 window.onload = function() {
     canvas = document.getElementById("game-window");
     context = canvas.getContext("2d");
-    
+
     canvas_width = canvas.width;
     canvas_height = canvas.height;
 
