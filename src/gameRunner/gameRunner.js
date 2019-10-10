@@ -1,12 +1,10 @@
 // import { Ship } from './src/spaceship/spaceship.js';
 // const Ship = require('./src/spaceship/spaceship.js');
-
+canvas = document.getElementById("game-window");
+context = canvas.getContext("2d");
+var level = 0;
 
 window.onload = function() {
-
-    var canvas = document.getElementById("game-window");
-    var context = canvas.getContext("2d");
-
     canvas_width = canvas.width;
     canvas_height = canvas.height;
 
