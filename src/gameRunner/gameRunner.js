@@ -6,13 +6,13 @@ var objects = [];
 var health = 4;
 
 
-function drawLoop(objects) {
+function gameLoop(objects) {
     context.clearRect(0, 0, 700, 700);
     objects.forEach(function(v) {
         v.draw();
     });
     setTimeout(function () {
-        drawLoop(objects);
+        gameLoop(objects);
     }, 30);
 }
 
@@ -60,16 +60,6 @@ window.onload = function() {
     // update_scores();
     this.drawLoop(ship);
 };
-
-function drawLoop(ship) {
-    console.log("(2): " + ship.getContext());
-    context.clearRect(0, 0, 700, 700); // This should probably just be a generic context
-    ship.move();
-    ship.draw();
-    setTimeout(function () {
-        drawLoop(ship);
-    }, 30);
-}
 
 function keydown_handler(event, ship) {
     // down arrow
