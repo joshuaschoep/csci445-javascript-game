@@ -1,6 +1,6 @@
 canvas = document.getElementById("game-window");
 context = canvas.getContext("2d");
-var level = 0;
+var level = 1;
 var score = 0;
 var spawn_timer = 0;
 var spawn_counter = 0;
@@ -8,45 +8,62 @@ var asteroids = [];
 var lasers = [];
 var health = 4;
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 var asteroidCountup = 0;
-function startLevel(level) {
-    var spawn_interval = Math.floor(Math.random() * 100 / level);
-    var spawn_number = Math.floor(Math.random() * level * 10 + 15);
-    gameLoop(level, spawn_interval, spawn_number);
+async function startLevel() {
+    var spawn_interval = Math.floor(Math.random() * 100 / (level * 0.2));
+    var spawn_number = Math.floor(Math.random() * level ^ 2 * 20 + 15);
+    spawn_timer = 0;
+    spawn_counter = 0;
+    asteroids = [];
+    await gameLoop(spawn_interval, spawn_number);
+
+    setTimeout(function () {
+        if(level == 20){
+            return;
+        }
+        level += 1;
+        startLevel();
+    })
 }
 
   
-function gameLoop(level, spawn_interval, spawn_number) {
-    context.clearRect(0, 0, 700, 700);
-    asteroids.forEach(function(v) {
-        //draws each asteroid
-        v.draw();
-    });
-    lasers.forEach(function(L){
-        //draws each spawned laser
-        // lasers are spawned when the spacebar is pressed.
-        // handled in the keyboard handler for the ship class
-        L.draw();
-        L.detectCollision(asteroids);
-    });
-    ship.move();
-    ship.draw();
-    
-    spawn_timer += 1;
-    if(spawn_timer >= spawn_interval){
-        console.log(asteroids);
-        spawnAsteroid();
-        spawn_interval = Math.floor(Math.random() * 100 / level);
-        spawn_timer = 0;
-    }
+async function gameLoop(spawn_interval, spawn_number) {
+    while(true){
+        context.clearRect(0, 0, 700, 700);
+        asteroids.forEach(function(v) {
+            //draws each asteroid
+            v.draw();
+        });
+        lasers.forEach(function(L){
+            //draws each spawned laser
+            // lasers are spawned when the spacebar is pressed.
+            // handled in the keyboard handler for the ship class
+            L.draw();
+            L.detectCollision(asteroids);
+        });
+        ship.move();
+        ship.draw();
+        
+        spawn_timer += 1;
+        if(spawn_timer >= spawn_interval){
+            console.log(asteroids);
+            spawnAsteroid();
+            spawn_interval = Math.floor(Math.random() * 100 / level);
+            spawn_timer = 0;
+        }
 
-    if(spawn_counter > spawn_number){
-        return;
+        $("#levelcount").text("Level: " + level + ", Asteroids: " + spawn_counter);
+
+        if(spawn_counter > spawn_number){
+            return;
+        }
+        
+        await sleep(30);
     }
-    
-    setTimeout(function () {
-        gameLoop(level, spawn_interval, spawn_number);
-    }, 30);
 }
 
 function spawnAsteroid(){
@@ -108,25 +125,25 @@ window.onload = function() {
     }, false);
 
     // update_scores();
-    this.startLevel(1);
+    this.startLevel();
 };
 
 function keydown_handler(event, ship) {
     // down arrow
     if (event.keyCode === 40) {
-        ship.yVelocity += 1;
+        ship.yVelocity += 2;
     }
     // up arrow
     if (event.keyCode === 38) {
-        ship.yVelocity -= 1;
+        ship.yVelocity -= 2;
     }
     // right arrow
     if (event.keyCode === 39) {
-        ship.xVelocity += 1;
+        ship.xVelocity += 2;
     }
     // left arrow
     if (event.keyCode === 37) {
-        ship.xVelocity -= 1;
+        ship.xVelocity -= 2;
     }
     // space bar
     if (event.keyCode === 32) {
@@ -261,6 +278,9 @@ class Laser {
 
                 // explosion animation...
                 // new Explosion(canvas, context).explode(this.xPos, this.yPos, this.width, this.height);
+
+                //increment asteroid counter (since we do this at the end of their life)
+                spawn_counter += 1;
 
                 // delete the asteroid when hit
                 delete asteroids[ast.indexOf(a)];

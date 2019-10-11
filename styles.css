@@ -41,6 +41,10 @@ section.game{
     padding: 50px;
 }
 
+#levelcount{
+    clear: right;
+}
+
 canvas#game-window{
     float: left;
     width: 640px;
