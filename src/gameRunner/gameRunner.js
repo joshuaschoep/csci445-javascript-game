@@ -89,7 +89,7 @@ class Asteroid {
     }
 
     detectCollision(s) {
-        if ((this.xPos >= s.xLoc) && (this.xPos <= s.xLoc + s.SHIP_WIDTH * .8) && (this.yPos <= s.yLoc + s.SHIP_HEIGHT * .9)) {
+        if ((this.xPos <= s.xLoc + s.SHIP_WIDTH * .8) && (this.xPos >= s.xLoc) && (this.yPos >= (s.yLoc + s.SHIP_HEIGHT) * 0.5) && (this.yPos <= (s.yLoc))) {
             console.log("ship hit");
             console.log(((this.xPos >= s.xLoc) && (this.xPos <= s.xLoc + s.SHIP_WIDTH * .8) && (this.yPos <= s.yLoc + s.SHIP_HEIGHT * .9)));
             console.log("xPos" + this.xPos + "\nyPos" + this.yPos + "\nship x" + s.xLoc + "\nship y" + s.yLoc);

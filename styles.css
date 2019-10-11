@@ -58,3 +58,10 @@ canvas#game-window{
     display: block;
     border: 1px solid #fff;
 }
+
+.healthBar {
+    background-color: yellow;
+    float: left;
+    width: 5%;
+    height: 10px
+}
