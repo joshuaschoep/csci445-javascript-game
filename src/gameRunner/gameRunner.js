@@ -9,7 +9,7 @@ window.onload = function() {
     canvas_width = canvas.width;
     canvas_height = canvas.height;
 
-    ship = new Ship(canvas_width / 2 - 11, canvas_height - 10, canvas, context);
+    ship = new Ship(canvas_width / 2 - 11, canvas_height - 50, canvas, context);
     this.ship.initDraw();
 
     window.addEventListener("keydown", function () {
@@ -25,7 +25,6 @@ window.onload = function() {
 };
 
 function drawLoop(ship) {
-
     console.log("(2): " + ship.getContext());
     context.clearRect(0, 0, 700, 700); // This should probably just be a generic context
     ship.move();
@@ -134,8 +133,13 @@ class Ship {
     }
 
     move() {
-        this.xLoc += this.xVelocity;
-        this.yLoc += this.yVelocity;
+        let changex = this.xLoc + this.xVelocity;
+        let changey = this.yLoc + this.yVelocity;
+        if(changex > 0 && changex < this.canvas.width - this.SHIP_WIDTH
+            && changey > 0 && changey < this.canvas.height - this.SHIP_HEIGHT){
+            this.xLoc += this.xVelocity;
+            this.yLoc += this.yVelocity;
+        }
     }
 }
 
