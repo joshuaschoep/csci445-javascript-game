@@ -99,15 +99,17 @@ class Asteroid {
         this.ctx.drawImage(this.image, this.xPos, this.yPos, this.width, this.height);
 
         //hitbox
-        this.ctx.beginPath();
-        this.ctx.lineWidth = "1";
-        this.ctx.strokeStyle = "red";
-        this.ctx.rect(this.xPos, this.yPos, this.width, this.height);
-        this.ctx.stroke();
+        // this.ctx.beginPath();
+        // this.ctx.lineWidth = "1";
+        // this.ctx.strokeStyle = "red";
+        // this.ctx.rect(this.xPos, this.yPos, this.width, this.height);
+        // this.ctx.stroke();
     }
 
     detectCollision(s) {
-        if ((this.xPos <= s.xLoc + s.SHIP_WIDTH * .8) && (this.xPos >= s.xLoc) && (this.yPos >= (s.yLoc + s.SHIP_HEIGHT) * 0.5) && (this.yPos <= (s.yLoc))) {
+        if(((s.xLoc >= this.xPos && s.xLoc <= this.xPos + this.width) && (s.yLoc <= this.yPos + this.height && s.yLoc >= this.yPos)) ||
+            ((s.xLoc + s.SHIP_WIDTH >= this.xPos && s.xLoc + s.SHIP_WIDTH <= this.xPos + this.width) && 
+            (s.yLoc + s.SHIP_HEIGHT <= this.yPos + this.height&& s.yLoc + s.SHIP_HEIGHT >= this.yPos))) {
             console.log("ship hit");
             console.log(((this.xPos >= s.xLoc) && (this.xPos <= s.xLoc + s.SHIP_WIDTH * .8) && (this.yPos <= s.yLoc + s.SHIP_HEIGHT * .9)));
             console.log("xPos" + this.xPos + "\nyPos" + this.yPos + "\nship x" + s.xLoc + "\nship y" + s.yLoc);
@@ -248,6 +250,13 @@ class Ship {
         this.context.drawImage(
             this.shipImg, this.xLoc, this.yLoc, this.SHIP_WIDTH, this.SHIP_HEIGHT
         )
+
+        //hitbox
+        // this.context.beginPath();
+        // this.context.lineWidth = "1";
+        // this.context.strokeStyle = "green";
+        // this.context.rect(this.xLoc, this.yLoc, this.SHIP_WIDTH, this.SHIP_HEIGHT);
+        // this.context.stroke();
     }
 
     move() {
