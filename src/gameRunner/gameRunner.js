@@ -2,17 +2,25 @@ canvas = document.getElementById("game-window");
 context = canvas.getContext("2d");
 var level = 0;
 var score = 0;
-var objects = [];
+var asteroids = [];
 var health = 4;
 
+var asteroidCountup = 0;
+function startLevel(level) {
+    var spawn_interval = Math.floor(Math.random() * 5000 / level);
+    gameLoop();
+}
 
-function gameLoop(objects) {
+
+function gameLoop() {
     context.clearRect(0, 0, 700, 700);
-    objects.forEach(function(v) {
+    asteroids.forEach(function(v) {
         v.draw();
     });
+    ship.move();
+    ship.draw();
     setTimeout(function () {
-        gameLoop(objects);
+        gameLoop();
     }, 30);
 }
 
@@ -58,7 +66,7 @@ window.onload = function() {
     }, false);
 
     // update_scores();
-    this.drawLoop(ship);
+    this.startLevel(1);
 };
 
 function keydown_handler(event, ship) {
