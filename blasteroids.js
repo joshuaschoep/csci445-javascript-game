@@ -20,8 +20,8 @@ async function startLevel() {
     asteroids = [];
     await gameLoop(spawn_interval, spawn_number);
 
-    setTimeout(function() {
-        if (level == 20) {
+    setTimeout(function () {
+        if(level === 20 || health <= 0){
             return;
         }
         level += 1;
@@ -89,7 +89,7 @@ class Asteroid {
         this.canvas = canvas;
         this.ctx = ctx;
         this.image = new Image();
-        this.image.src = "./images/Aestroids/aestroid_gray.png";
+        this.image.src = "./images/aestroid_gray.png";
     }
 
     draw() {
@@ -192,7 +192,7 @@ class Ship {
         this.context = ctx;
 
         this.shipImg = new Image();
-        this.shipImg.src = "./images/Blue/Small_ship_blue/1.png";
+        this.shipImg.src = "./images/1.png";
     }
 
     getContext() {
@@ -271,7 +271,7 @@ class Laser {
         this.canvas = canvas;
         this.ctx = ctx;
         this.laserImg = new Image();
-        this.laserImg.src = "./images/Blue/bullet.png";
+        this.laserImg.src = "./images/bullet.png";
     }
 
     draw() {
