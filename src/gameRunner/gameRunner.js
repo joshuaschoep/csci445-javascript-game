@@ -97,6 +97,13 @@ class Asteroid {
         }
 
         this.ctx.drawImage(this.image, this.xPos, this.yPos, this.width, this.height);
+
+        //hitbox
+        this.ctx.beginPath();
+        this.ctx.lineWidth = "1";
+        this.ctx.strokeStyle = "red";
+        this.ctx.rect(this.xPos, this.yPos, this.width, this.height);
+        this.ctx.stroke();
     }
 
     detectCollision(s) {
