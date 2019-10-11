@@ -14,6 +14,7 @@ function startLevel(level) {
     gameLoop(level, spawn_interval, spawn_number);
 }
 
+  
 function gameLoop(level, spawn_interval, spawn_number) {
     context.clearRect(0, 0, 700, 700);
     asteroids.forEach(function(v) {
