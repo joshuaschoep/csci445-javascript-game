@@ -34,6 +34,8 @@ async function startLevel() {
 async function gameLoop(spawn_interval, spawn_number) {
     while (health > 0 && level <= 20) {
         context.clearRect(0, 0, 700, 700);
+
+        
         asteroids.forEach(function(v) {
             //draws each asteroid
             v.detectCollision(ship);
