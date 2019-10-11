@@ -1,8 +1,6 @@
-//import { Ship } from './src/spaceship/spaceship.js';
-// const Ship = require('./src/spaceship/spaceship.js');
-// canvas = document.getElementById("game-window");
-// context = canvas.getContext("2d");
-// var level = 0;
+canvas = document.getElementById("game-window");
+context = canvas.getContext("2d");
+var level = 0;
 
 window.onload = function() {
     canvas = document.getElementById("game-window");
@@ -11,11 +9,15 @@ window.onload = function() {
     canvas_width = canvas.width;
     canvas_height = canvas.height;
 
-    ship = new Ship(canvas_width / 2 - 15, canvas_height - 50, canvas, context);
+    ship = new Ship(canvas_width / 2 - 11, canvas_height - 10, canvas, context);
     this.ship.initDraw();
 
     window.addEventListener("keydown", function () {
         keydown_handler(event, ship);
+    }, false);
+
+    window.addEventListener("keyup", function () {
+        keyup_handler(event, ship);
     }, false);
 
     // update_scores();
@@ -26,6 +28,7 @@ function drawLoop(ship) {
 
     console.log("(2): " + ship.getContext());
     context.clearRect(0, 0, 700, 700); // This should probably just be a generic context
+    ship.move();
     ship.draw();
     setTimeout(function () {
         drawLoop(ship);
@@ -35,23 +38,38 @@ function drawLoop(ship) {
 function keydown_handler(event, ship) {
     // down arrow
     if (event.keyCode === 40) {
-        ship.moveDown();
-        ship.draw();
+        ship.yVelocity += 1;
     }
     // up arrow
     if (event.keyCode === 38) {
-        ship.moveUp();
-        ship.draw();
+        ship.yVelocity -= 1;
     }
     // right arrow
     if (event.keyCode === 39) {
-        ship.moveRight();
-        ship.draw();
+        ship.xVelocity += 1;
     }
     // left arrow
     if (event.keyCode === 37) {
-        ship.moveLeft();
-        ship.draw();
+        ship.xVelocity -= 1;
+    }
+}
+
+function keyup_handler(event, ship){
+    // down arrow
+    if (event.keyCode === 40) {
+        ship.yVelocity = 0;
+    }
+    // up arrow
+    if (event.keyCode === 38) {
+        ship.yVelocity = 0;
+    }
+    // right arrow
+    if (event.keyCode === 39) {
+        ship.xVelocity = 0;
+    }
+    // left arrow
+    if (event.keyCode === 37) {
+        ship.xVelocity = 0;
     }
 }
 
@@ -60,7 +78,9 @@ class Ship {
     yLoc;
     canvas;
     context;
-    SHIP_HEIGHT = 15;
+    xVelocity = 0;
+    yVelocity = 0;
+    SHIP_HEIGHT = 11;
     SHIP_WIDTH = 30;
     shipImg;
 
@@ -71,7 +91,7 @@ class Ship {
         this.context = ctx;
 
         this.shipImg = new Image();
-        this.shipImg.src = "./images/Blue/Small_ship_blue/5.png";
+        this.shipImg.src = "./images/Blue/Small_ship_blue/1.png";
     }
 
     getContext() {
@@ -113,35 +133,9 @@ class Ship {
         )
     }
 
-    moveRight() {
-        // console.log("moveRight");
-        if (this.xLoc <= this.canvas.width - this.SHIP_WIDTH) {
-            this.xLoc = this.xLoc + 5;
-        }
-    }
-
-    moveLeft() {
-        // console.log("moveLeft");
-        if (this.xLoc > -5) {
-            this.xLoc = this.xLoc - 5;
-        }
-    }
-
-    moveUp() {
-        // console.log("moveUp");
-        if (this.yLoc > 0) {
-            // console.log("Changing yLoc");
-            this.yLoc = this.yLoc - 5;
-        }
-    }
-
-    moveDown() {
-        // console.log("moveDown");
-        // console.log("Canvas height: " + this.canvas.height);
-        if (this.yLoc < this.canvas.height - this.SHIP_HEIGHT) {
-            // console.log("Changing yLoc");
-            this.yLoc = this.yLoc + 5;
-        }
+    move() {
+        this.xLoc += this.xVelocity;
+        this.yLoc += this.yVelocity;
     }
 }
 
