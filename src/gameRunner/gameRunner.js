@@ -5,6 +5,7 @@ var score = 0;
 var spawn_timer = 0;
 var spawn_counter = 0;
 var asteroids = [];
+var lasers = [];
 var health = 4;
 
 var asteroidCountup = 0;
@@ -18,7 +19,12 @@ function startLevel(level) {
 function gameLoop(level, spawn_interval, spawn_number) {
     context.clearRect(0, 0, 700, 700);
     asteroids.forEach(function(v) {
+        //draws each asteroid
         v.draw();
+    });
+    lasers.forEach(function(L){
+        //draws each spawned laser
+        L.draw();
     });
     ship.move();
     ship.draw();
@@ -42,6 +48,11 @@ function gameLoop(level, spawn_interval, spawn_number) {
 
 function spawnAsteroid(){
     asteroids.push(new Asteroid(0.9, Math.floor(Math.random() * canvas_width), -50, canvas, context));
+}
+
+function spawnLaser(x, y){
+    // given the ship firing the laser, push a laser onto the laser array to be rendered
+    lasers.push(new Laser(2, x, y, canvas, context));
 }
 
 class Asteroid {
@@ -107,11 +118,15 @@ function keydown_handler(event, ship) {
     }
     // right arrow
     if (event.keyCode === 39) {
-        ship.xVelocity += 1;
+        ship.xVelocity += 3;
     }
     // left arrow
     if (event.keyCode === 37) {
-        ship.xVelocity -= 1;
+        ship.xVelocity -= 3;
+    }
+    // space bar
+    if (event.keyCode === 32) {
+        ship.fireLaser();
     }
 }
 
@@ -203,4 +218,32 @@ class Ship {
             this.yLoc += this.yVelocity;
         }
     }
+
+    fireLaser() {
+        // fire the laser with the ship when the space bar is pressed
+        // x position passed and guestimated the -2 so it looks better.
+        spawnLaser(this.xLoc+0.5*this.SHIP_WIDTH-2, this.yLoc);
+    }
+}
+
+class Laser {
+
+    constructor(vY, xPos, yPos, canvas, ctx) {
+        // basically copying the ship class constructor and variables
+        this.vY = -vY;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.width = 3;
+        this.height = 6;
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.laserImg = new Image();
+        this.laserImg.src = "./images/Blue/bullet.png";
+    }
+
+    draw() {
+        this.yPos += this.vY;
+        this.ctx.drawImage(this.laserImg, this.xPos, this.yPos, this.width, this.height);
+    }
+
 }
