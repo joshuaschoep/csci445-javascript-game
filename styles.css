@@ -13,10 +13,16 @@ body{
     width: 1240px;
 }
 
+header img{
+    float: left;
+    padding: 10px;
+}
+
 h1{
     font-family: monospace;
     float: left;
     padding: 10px;
+    line-height: 40px;
     font-size: 30px;
     color: #fff;
 }
