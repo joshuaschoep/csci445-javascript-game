@@ -24,7 +24,10 @@ function gameLoop(level, spawn_interval, spawn_number) {
     });
     lasers.forEach(function(L){
         //draws each spawned laser
+        // lasers are spawned when the spacebar is pressed.
+        // handled in the keyboard handler for the ship class
         L.draw();
+        L.detectCollision(asteroids);
     });
     ship.move();
     ship.draw();
@@ -118,14 +121,15 @@ function keydown_handler(event, ship) {
     }
     // right arrow
     if (event.keyCode === 39) {
-        ship.xVelocity += 3;
+        ship.xVelocity += 1;
     }
     // left arrow
     if (event.keyCode === 37) {
-        ship.xVelocity -= 3;
+        ship.xVelocity -= 1;
     }
     // space bar
     if (event.keyCode === 32) {
+        // pressing spacebar calls the fireLaser function for the ship
         ship.fireLaser();
     }
 }
@@ -220,6 +224,7 @@ class Ship {
     }
 
     fireLaser() {
+        // calls the global spawnLaser function and passed the ships ylocation and center xlocation
         // fire the laser with the ship when the space bar is pressed
         // x position passed and guestimated the -2 so it looks better.
         spawnLaser(this.xLoc+0.5*this.SHIP_WIDTH-2, this.yLoc);
@@ -229,11 +234,11 @@ class Ship {
 class Laser {
 
     constructor(vY, xPos, yPos, canvas, ctx) {
-        // basically copying the ship class constructor and variables
+        // basically copying the asteroid class constructor and variables
         this.vY = -vY;
         this.xPos = xPos;
         this.yPos = yPos;
-        this.width = 3;
+        this.width = 4;
         this.height = 6;
         this.canvas = canvas;
         this.ctx = ctx;
@@ -244,6 +249,22 @@ class Laser {
     draw() {
         this.yPos += this.vY;
         this.ctx.drawImage(this.laserImg, this.xPos, this.yPos, this.width, this.height);
+    }
+
+    // given the array of asteroids, detect any collisions
+    detectCollision(ast) {
+        ast.forEach(function(a){
+            // need to clean up the boundaries for cleaner collisions but works
+            if(this.xPos >= a.xPos && this.xPos <= a.xPos+a.width && this.yPos <= a.yPos+a.height) {
+                console.log("hit");
+
+                // delete the asteroid when hit
+                delete asteroids[ast.indexOf(a)];
+
+                // delete laser when hits asteroid
+                delete lasers[lasers.indexOf(this)];
+            }
+        }.bind(this));
     }
 
 }
