@@ -12,7 +12,6 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-var asteroidCountup = 0;
 async function startLevel() {
     var spawn_interval = Math.floor(Math.random() * 100 / (level * 0.2));
     var spawn_number = Math.floor(Math.random() * level ^ 2 * 20 + 15);
@@ -34,8 +33,9 @@ async function startLevel() {
 async function gameLoop(spawn_interval, spawn_number) {
     while(true){
         context.clearRect(0, 0, 700, 700);
-        asteroids.forEach(function(v) {
+        asteroids.forEach(function (v) {
             //draws each asteroid
+            v.detectCollision(ship);
             v.draw();
         });
         lasers.forEach(function(L){
@@ -66,11 +66,11 @@ async function gameLoop(spawn_interval, spawn_number) {
     }
 }
 
-function spawnAsteroid(){
+function spawnAsteroid() {
     asteroids.push(new Asteroid(0.9, Math.floor(Math.random() * canvas_width), -50, canvas, context));
 }
 
-function spawnLaser(x, y){
+function spawnLaser(x, y) {
     // given the ship firing the laser, push a laser onto the laser array to be rendered
     lasers.push(new Laser(2, x, y, canvas, context));
 }
@@ -91,7 +91,7 @@ class Asteroid {
     draw() {
         this.yPos += this.vY;
 
-        if(this.yPos > canvas_height){
+        if (this.yPos > canvas_height) {
             spawn_counter += 1;
             asteroids.splice(asteroids.indexOf(this), 1);
         }
@@ -99,6 +99,17 @@ class Asteroid {
         this.ctx.drawImage(this.image, this.xPos, this.yPos, this.width, this.height);
     }
 
+    detectCollision(s) {
+        if ((this.xPos >= s.xLoc) && (this.xPos <= s.xLoc + s.SHIP_WIDTH * .8) && (this.yPos <= s.yLoc + s.SHIP_HEIGHT * .9)) {
+            console.log("ship hit");
+            console.log(((this.xPos >= s.xLoc) && (this.xPos <= s.xLoc + s.SHIP_WIDTH * .8) && (this.yPos <= s.yLoc + s.SHIP_HEIGHT * .9)));
+            console.log("xPos" + this.xPos + "\nyPos" + this.yPos + "\nship x" + s.xLoc + "\nship y" + s.yLoc);
+
+            health -= 1;
+            delete asteroids[asteroids.indexOf(this)];
+            document.getElementsByClassName("healthBar")[health].style.visibility = "hidden";
+        }
+    }
 }
 
 function math() {
@@ -106,9 +117,10 @@ function math() {
     var spawn_number = console.log(Math.floor(Math.random() * level * 10));
 }
 
-window.onload = function() {
+window.onload = function () {
     canvas = document.getElementById("game-window");
     context = canvas.getContext("2d");
+    health = 4;
 
     canvas_width = canvas.width;
     canvas_height = canvas.height;
@@ -152,7 +164,7 @@ function keydown_handler(event, ship) {
     }
 }
 
-function keyup_handler(event, ship){
+function keyup_handler(event, ship) {
     // down arrow
     if (event.keyCode === 40) {
         ship.yVelocity = 0;
@@ -234,8 +246,8 @@ class Ship {
     move() {
         let changex = this.xLoc + this.xVelocity;
         let changey = this.yLoc + this.yVelocity;
-        if(changex > 0 && changex < this.canvas.width - this.SHIP_WIDTH
-            && changey > 0 && changey < this.canvas.height - this.SHIP_HEIGHT){
+        if (changex > 0 && changex < this.canvas.width - this.SHIP_WIDTH
+            && changey > 0 && changey < this.canvas.height - this.SHIP_HEIGHT) {
             this.xLoc += this.xVelocity;
             this.yLoc += this.yVelocity;
         }
@@ -245,7 +257,7 @@ class Ship {
         // calls the global spawnLaser function and passed the ships ylocation and center xlocation
         // fire the laser with the ship when the space bar is pressed
         // x position passed and guestimated the -2 so it looks better.
-        spawnLaser(this.xLoc+0.5*this.SHIP_WIDTH-2, this.yLoc);
+        spawnLaser(this.xLoc + 0.5 * this.SHIP_WIDTH - 2, this.yLoc);
     }
 }
 
@@ -271,9 +283,9 @@ class Laser {
 
     // given the array of asteroids, detect any collisions for each asteroid
     detectCollision(ast) {
-        ast.forEach(function(a){
+        ast.forEach(function (a) {
             // need to clean up the boundaries for cleaner collisions but works
-            if(this.xPos >= a.xPos && this.xPos <= a.xPos+a.width*.8 && this.yPos <= a.yPos+a.height*.9) {
+            if (this.xPos >= a.xPos && this.xPos <= a.xPos + a.width * .8 && this.yPos <= a.yPos + a.height * .9) {
                 // console.log("hit");
 
                 // explosion animation...
@@ -288,7 +300,7 @@ class Laser {
                 // delete laser when hits asteroid
                 delete lasers[lasers.indexOf(this)];
 
-                
+
             }
         }.bind(this));
     }
@@ -300,14 +312,14 @@ class Laser {
 //         this.canvas = canvas;
 //         this.context = context;
 //         this.maxRadius = 100;
-       
+
 //     }
 //     explode(xPos, yPos, width, height) {
 //         for (var i = 0; i < this.maxRadius; i++){
-            
+
 //             console.log(this.explosionImg.src);
-            
-            
+
+
 //         }
 //     }
 // }

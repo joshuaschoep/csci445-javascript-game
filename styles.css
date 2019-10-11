@@ -3,6 +3,36 @@
     padding: 0;
 }
 
+@keyframes colorChanger {
+    5% {
+        color: #fff;
+    }
+    17% {
+        color: #ff0000;
+    }
+    28% {
+        color: #ff7f00;
+    }
+    39% {
+        color: #FFFF00;
+    }
+    50% {
+        color: #00ff00;
+    }
+    61% {
+        color: #0000ff;
+    }
+    72% {
+        color: #4B0082;
+    }
+    83% {
+        color: #8b00ff;
+    }
+    92% {
+        color: #fff;
+    }
+}
+
 html{
     background-color: #000;
 }
@@ -25,6 +55,9 @@ h1{
     line-height: 40px;
     font-size: 30px;
     color: #fff;
+    animation-name: colorChanger;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
 }
 
 h2{
