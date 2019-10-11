@@ -20,8 +20,8 @@ async function startLevel() {
     asteroids = [];
     await gameLoop(spawn_interval, spawn_number);
 
-    setTimeout(function () {
-        if(level == 20){
+    setTimeout(function() {
+        if (level == 20) {
             return;
         }
         level += 1;
@@ -32,14 +32,14 @@ async function startLevel() {
 
 
 async function gameLoop(spawn_interval, spawn_number) {
-    while(health > 0 && level <= 20) {
+    while (health > 0 && level <= 20) {
         context.clearRect(0, 0, 700, 700);
-        asteroids.forEach(function (v) {
+        asteroids.forEach(function(v) {
             //draws each asteroid
             v.detectCollision(ship);
             v.draw();
         });
-        lasers.forEach(function(L){
+        lasers.forEach(function(L) {
             //draws each spawned laser
             // lasers are spawned when the spacebar is pressed.
             // handled in the keyboard handler for the ship class
@@ -48,9 +48,9 @@ async function gameLoop(spawn_interval, spawn_number) {
         });
         ship.move();
         ship.draw();
-        
+
         spawn_timer += 1;
-        if(spawn_timer >= spawn_interval){
+        if (spawn_timer >= spawn_interval) {
             console.log(asteroids);
             spawnAsteroid();
             spawn_interval = Math.floor(Math.random() * 100 / level);
@@ -59,10 +59,10 @@ async function gameLoop(spawn_interval, spawn_number) {
 
         $("#levelcount").text("Level: " + level + ", Asteroids: " + spawn_counter);
 
-        if(spawn_counter > spawn_number){
+        if (spawn_counter > spawn_number) {
             return;
         }
-        
+
         await sleep(30);
     }
     highscore(score);
@@ -109,9 +109,9 @@ class Asteroid {
     }
 
     detectCollision(s) {
-        if(((s.xLoc >= this.xPos && s.xLoc <= this.xPos + this.width) && (s.yLoc <= this.yPos + this.height && s.yLoc >= this.yPos)) ||
-            ((s.xLoc + s.SHIP_WIDTH >= this.xPos && s.xLoc + s.SHIP_WIDTH <= this.xPos + this.width) && 
-            (s.yLoc + s.SHIP_HEIGHT <= this.yPos + this.height&& s.yLoc + s.SHIP_HEIGHT >= this.yPos))) {
+        if (((s.xLoc >= this.xPos && s.xLoc <= this.xPos + this.width) && (s.yLoc <= this.yPos + this.height && s.yLoc >= this.yPos)) ||
+            ((s.xLoc + s.SHIP_WIDTH >= this.xPos && s.xLoc + s.SHIP_WIDTH <= this.xPos + this.width) &&
+                (s.yLoc + s.SHIP_HEIGHT <= this.yPos + this.height && s.yLoc + s.SHIP_HEIGHT >= this.yPos))) {
             console.log("ship hit");
             console.log(((this.xPos >= s.xLoc) && (this.xPos <= s.xLoc + s.SHIP_WIDTH * .8) && (this.yPos <= s.yLoc + s.SHIP_HEIGHT * .9)));
             console.log("xPos" + this.xPos + "\nyPos" + this.yPos + "\nship x" + s.xLoc + "\nship y" + s.yLoc);
@@ -128,28 +128,6 @@ function math() {
     var spawn_number = console.log(Math.floor(Math.random() * level * 10));
 }
 
-window.onload = function () {
-    canvas = document.getElementById("game-window");
-    context = canvas.getContext("2d");
-    health = 4;
-
-    canvas_width = canvas.width;
-    canvas_height = canvas.height;
-
-    ship = new Ship(canvas_width / 2 - 11, canvas_height - 50, canvas, context);
-    this.ship.initDraw();
-
-    window.addEventListener("keydown", function () {
-        keydown_handler(event, ship);
-    }, false);
-
-    window.addEventListener("keyup", function () {
-        keyup_handler(event, ship);
-    }, false);
-
-    // update_scores();
-    this.startLevel();
-};
 
 function keydown_handler(event, ship) {
     // down arrow
@@ -229,7 +207,7 @@ class Ship {
         var _ship_height = this.SHIP_HEIGHT;
         var _ship_width = this.SHIP_WIDTH;
 
-        this.shipImg.addEventListener("load", function () {
+        this.shipImg.addEventListener("load", function() {
 
             // console.log("Vars:");
             // console.log(_xLoc);
@@ -264,8 +242,8 @@ class Ship {
     move() {
         let changex = this.xLoc + this.xVelocity;
         let changey = this.yLoc + this.yVelocity;
-        if (changex > 0 && changex < this.canvas.width - this.SHIP_WIDTH
-            && changey > 0 && changey < this.canvas.height - this.SHIP_HEIGHT) {
+        if (changex > 0 && changex < this.canvas.width - this.SHIP_WIDTH &&
+            changey > 0 && changey < this.canvas.height - this.SHIP_HEIGHT) {
             this.xLoc += this.xVelocity;
             this.yLoc += this.yVelocity;
         }
@@ -301,7 +279,7 @@ class Laser {
 
     // given the array of asteroids, detect any collisions for each asteroid
     detectCollision(ast) {
-        ast.forEach(function (a) {
+        ast.forEach(function(a) {
             // need to clean up the boundaries for cleaner collisions but works
             if (this.xPos >= a.xPos && this.xPos <= a.xPos + a.width * .8 && this.yPos <= a.yPos + a.height * .9) {
                 // console.log("hit");
@@ -327,6 +305,28 @@ class Laser {
 
 }
 
+window.onload = function() {
+    canvas = document.getElementById("game-window");
+    context = canvas.getContext("2d");
+    health = 4;
+
+    canvas_width = canvas.width;
+    canvas_height = canvas.height;
+
+    ship = new Ship(canvas_width / 2 - 11, canvas_height - 50, canvas, context);
+    this.ship.initDraw();
+
+    window.addEventListener("keydown", function() {
+        keydown_handler(event, ship);
+    }, false);
+
+    window.addEventListener("keyup", function() {
+        keyup_handler(event, ship);
+    }, false);
+
+    // update_scores();
+    this.startLevel();
+};
 // class Explosion {
 //     constructor(canvas, context){
 //         this.canvas = canvas;
