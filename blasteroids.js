@@ -25,13 +25,14 @@ async function startLevel() {
             return;
         }
         level += 1;
+        score += 1000;
         startLevel();
     })
 }
 
-  
+
 async function gameLoop(spawn_interval, spawn_number) {
-    while(true){
+    while(health > 0 && level <= 20) {
         context.clearRect(0, 0, 700, 700);
         asteroids.forEach(function (v) {
             //draws each asteroid
@@ -64,6 +65,7 @@ async function gameLoop(spawn_interval, spawn_number) {
         
         await sleep(30);
     }
+    highscore(score);
 }
 
 function spawnAsteroid() {
@@ -315,6 +317,8 @@ class Laser {
 
                 // delete laser when hits asteroid
                 delete lasers[lasers.indexOf(this)];
+
+                score += 100;
 
 
             }
