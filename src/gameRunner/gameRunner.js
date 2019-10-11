@@ -2,26 +2,46 @@ canvas = document.getElementById("game-window");
 context = canvas.getContext("2d");
 var level = 0;
 var score = 0;
+var spawn_timer = 0;
+var spawn_counter = 0;
 var asteroids = [];
 var health = 4;
 
 var asteroidCountup = 0;
 function startLevel(level) {
-    var spawn_interval = Math.floor(Math.random() * 5000 / level);
-    gameLoop();
+    var spawn_interval = Math.floor(Math.random() * 100 / level);
+    var spawn_number = Math.floor(Math.random() * level * 10 + 15);
+    gameLoop(level, spawn_interval, spawn_number);
 }
 
 
-function gameLoop() {
+function gameLoop(level, spawn_interval, spawn_number) {
     context.clearRect(0, 0, 700, 700);
     asteroids.forEach(function(v) {
         v.draw();
     });
     ship.move();
     ship.draw();
+    
+    spawn_timer += 1;
+    if(spawn_timer >= spawn_interval){
+        console.log(asteroids);
+        spawnAsteroid();
+        spawn_interval = Math.floor(Math.random() * 100 / level);
+        spawn_timer = 0;
+    }
+
+    if(spawn_counter > spawn_number){
+        return;
+    }
+    
     setTimeout(function () {
-        gameLoop();
+        gameLoop(level, spawn_interval, spawn_number);
     }, 30);
+}
+
+function spawnAsteroid(){
+    asteroids.push(new Asteroid(0.9, Math.floor(Math.random() * canvas_width), -50, canvas, context));
 }
 
 class Asteroid {
@@ -38,7 +58,14 @@ class Asteroid {
     }
 
     draw() {
-        this.ctx.drawImage(this.image, this.xPos, this.yPos + this.vY, this.width, this.height);
+        this.yPos += this.vY;
+
+        if(this.yPos > canvas_height){
+            spawn_counter += 1;
+            asteroids.splice(asteroids.indexOf(this), 1);
+        }
+
+        this.ctx.drawImage(this.image, this.xPos, this.yPos, this.width, this.height);
     }
 }
 
