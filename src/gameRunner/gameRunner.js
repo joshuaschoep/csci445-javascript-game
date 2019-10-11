@@ -5,6 +5,7 @@ var score = 0;
 var spawn_timer = 0;
 var spawn_counter = 0;
 var asteroids = [];
+var lasers = [];
 var health = 4;
 
 var asteroidCountup = 0;
@@ -18,7 +19,15 @@ function startLevel(level) {
 function gameLoop(level, spawn_interval, spawn_number) {
     context.clearRect(0, 0, 700, 700);
     asteroids.forEach(function(v) {
+        //draws each asteroid
         v.draw();
+    });
+    lasers.forEach(function(L){
+        //draws each spawned laser
+        // lasers are spawned when the spacebar is pressed.
+        // handled in the keyboard handler for the ship class
+        L.draw();
+        L.detectCollision(asteroids);
     });
     ship.move();
     ship.draw();
@@ -44,6 +53,11 @@ function spawnAsteroid(){
     asteroids.push(new Asteroid(0.9, Math.floor(Math.random() * canvas_width), -50, canvas, context));
 }
 
+function spawnLaser(x, y){
+    // given the ship firing the laser, push a laser onto the laser array to be rendered
+    lasers.push(new Laser(2, x, y, canvas, context));
+}
+
 class Asteroid {
     constructor(vY, xPos, yPos, canvas, ctx) {
         this.vY = vY;
@@ -67,6 +81,7 @@ class Asteroid {
 
         this.ctx.drawImage(this.image, this.xPos, this.yPos, this.width, this.height);
     }
+
 }
 
 function math() {
@@ -112,6 +127,11 @@ function keydown_handler(event, ship) {
     // left arrow
     if (event.keyCode === 37) {
         ship.xVelocity -= 1;
+    }
+    // space bar
+    if (event.keyCode === 32) {
+        // pressing spacebar calls the fireLaser function for the ship
+        ship.fireLaser();
     }
 }
 
@@ -203,4 +223,71 @@ class Ship {
             this.yLoc += this.yVelocity;
         }
     }
+
+    fireLaser() {
+        // calls the global spawnLaser function and passed the ships ylocation and center xlocation
+        // fire the laser with the ship when the space bar is pressed
+        // x position passed and guestimated the -2 so it looks better.
+        spawnLaser(this.xLoc+0.5*this.SHIP_WIDTH-2, this.yLoc);
+    }
 }
+
+class Laser {
+
+    constructor(vY, xPos, yPos, canvas, ctx) {
+        // basically copying the asteroid class constructor and variables
+        this.vY = -vY;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.width = 4;
+        this.height = 6;
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.laserImg = new Image();
+        this.laserImg.src = "./images/Blue/bullet.png";
+    }
+
+    draw() {
+        this.yPos += this.vY;
+        this.ctx.drawImage(this.laserImg, this.xPos, this.yPos, this.width, this.height);
+    }
+
+    // given the array of asteroids, detect any collisions for each asteroid
+    detectCollision(ast) {
+        ast.forEach(function(a){
+            // need to clean up the boundaries for cleaner collisions but works
+            if(this.xPos >= a.xPos && this.xPos <= a.xPos+a.width*.8 && this.yPos <= a.yPos+a.height*.9) {
+                // console.log("hit");
+
+                // explosion animation...
+                // new Explosion(canvas, context).explode(this.xPos, this.yPos, this.width, this.height);
+
+                // delete the asteroid when hit
+                delete asteroids[ast.indexOf(a)];
+
+                // delete laser when hits asteroid
+                delete lasers[lasers.indexOf(this)];
+
+                
+            }
+        }.bind(this));
+    }
+
+}
+
+// class Explosion {
+//     constructor(canvas, context){
+//         this.canvas = canvas;
+//         this.context = context;
+//         this.maxRadius = 100;
+       
+//     }
+//     explode(xPos, yPos, width, height) {
+//         for (var i = 0; i < this.maxRadius; i++){
+            
+//             console.log(this.explosionImg.src);
+            
+            
+//         }
+//     }
+// }
