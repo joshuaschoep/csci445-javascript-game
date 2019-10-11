@@ -81,6 +81,7 @@ class Asteroid {
 
         this.ctx.drawImage(this.image, this.xPos, this.yPos, this.width, this.height);
     }
+
 }
 
 function math() {
@@ -251,20 +252,42 @@ class Laser {
         this.ctx.drawImage(this.laserImg, this.xPos, this.yPos, this.width, this.height);
     }
 
-    // given the array of asteroids, detect any collisions
+    // given the array of asteroids, detect any collisions for each asteroid
     detectCollision(ast) {
         ast.forEach(function(a){
             // need to clean up the boundaries for cleaner collisions but works
-            if(this.xPos >= a.xPos && this.xPos <= a.xPos+a.width && this.yPos <= a.yPos+a.height) {
-                console.log("hit");
+            if(this.xPos >= a.xPos && this.xPos <= a.xPos+a.width*.8 && this.yPos <= a.yPos+a.height*.9) {
+                // console.log("hit");
+
+                // explosion animation...
+                // new Explosion(canvas, context).explode(this.xPos, this.yPos, this.width, this.height);
 
                 // delete the asteroid when hit
                 delete asteroids[ast.indexOf(a)];
 
                 // delete laser when hits asteroid
                 delete lasers[lasers.indexOf(this)];
+
+                
             }
         }.bind(this));
     }
 
 }
+
+// class Explosion {
+//     constructor(canvas, context){
+//         this.canvas = canvas;
+//         this.context = context;
+//         this.maxRadius = 100;
+       
+//     }
+//     explode(xPos, yPos, width, height) {
+//         for (var i = 0; i < this.maxRadius; i++){
+            
+//             console.log(this.explosionImg.src);
+            
+            
+//         }
+//     }
+// }
