@@ -1,6 +1,43 @@
 canvas = document.getElementById("game-window");
 context = canvas.getContext("2d");
 var level = 0;
+var score = 0;
+var objects = [];
+var health = 4;
+
+
+function drawLoop(objects) {
+    context.clearRect(0, 0, 700, 700);
+    objects.forEach(function(v) {
+        v.draw();
+    });
+    setTimeout(function () {
+        drawLoop(objects);
+    }, 30);
+}
+
+class Asteroid {
+    constructor(vY, xPos, yPos, canvas, ctx) {
+        this.vY = vY;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.width = 30;
+        this.height = 30;
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.image = new Image();
+        this.image.src = "./images/Aestroids/aestroid_gray.png";
+    }
+
+    draw() {
+        this.ctx.drawImage(this.image, this.xPos, this.yPos + this.vY, this.width, this.height);
+    }
+}
+
+function math() {
+    var spawn_interval = console.log(Math.floor(Math.random() * 5000 / level));
+    var spawn_number = console.log(Math.floor(Math.random() * level * 10));
+}
 
 window.onload = function() {
     canvas = document.getElementById("game-window");
@@ -138,16 +175,3 @@ class Ship {
         this.yLoc += this.yVelocity;
     }
 }
-
-// class Asteroid {
-//     constructor(vY, xPos, yPos) {
-//         this.vY = vY;
-//         this.xPos = xPos;
-//         this.yPos = yPos;
-//     }
-//
-//     draw() {
-//         context.clearRect(this.xPos, this.yPos, 20, 20);
-//         context.drawImage(asteroidImg, this.xPos, this.yPos + this.vY, ASTEROID_WIDTH, ASTEROID_HEIGHT);
-//     }
-// }
