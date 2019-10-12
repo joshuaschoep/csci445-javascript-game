@@ -175,22 +175,15 @@ function keyup_handler(event, ship) {
 }
 
 class Ship {
-    xLoc;
-    yLoc;
-    canvas;
-    context;
-    xVelocity = 0;
-    yVelocity = 0;
-    SHIP_HEIGHT = 11;
-    SHIP_WIDTH = 30;
-    shipImg;
-
     constructor(x, y, canvas, ctx) {
         this.xLoc = x;
         this.yLoc = y;
         this.canvas = canvas;
         this.context = ctx;
-
+        this.xVelocity = 0;
+        this.yVelocity = 0;
+        this.SHIP_HEIGHT = 11;
+        this.SHIP_WIDTH = 30;
         this.shipImg = new Image();
         this.shipImg.src = "./images/1.png";
     }
