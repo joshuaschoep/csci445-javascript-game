@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
@@ -33,22 +33,22 @@
     }
 }
 
-html{
+html {
     background-color: #000;
 }
 
-body{
+body {
     margin: auto;
     display: block;
     width: 1240px;
 }
 
-header img{
+header img {
     float: left;
     padding: 10px;
 }
 
-h1{
+h1 {
     font-family: monospace;
     float: left;
     padding: 10px;
@@ -60,7 +60,7 @@ h1{
     animation-iteration-count: infinite;
 }
 
-h2{
+h2 {
     font-family: Arial, sans-serif;
     font-weight: 400;
     float: right;
@@ -69,26 +69,27 @@ h2{
     color: #fff;
 }
 
-section.game{
+section.game {
     clear: both;
     margin: 50px;
     overflow: hidden;
 }
 
-#levelcount{
+#levelcount {
     clear: right;
 }
 
-canvas#game-window{
+canvas#game-window {
     float: left;
     width: 640px;
     height: 640px;
     /* padding-top: 30px; Simon Got rid of b/c not really sure why */
     display: block;
     border: 1px solid #fff;
+    background-image: linear-gradient(black, #2c2c2c, #464646);
 }
 
-#scoreboard-window{
+#scoreboard-window {
     float: right;
     width: 480px;
     height: 640px;
@@ -104,19 +105,19 @@ canvas#game-window{
     height: 10px
 }
 
-footer{
+footer {
     clear: both;
-	margin-top: 20px;
-	text-align: center;
-	overflow: hidden;
-	background-color: var(--background-primary);
-	color: #fff;
-	padding-top: 20px;
-	display: block;
+    margin-top: 20px;
+    text-align: center;
+    overflow: hidden;
+    background-color: var(--background-primary);
+    color: #fff;
+    padding-top: 20px;
+    display: block;
 }
 
-footer table{
-	margin: auto;
+footer table {
+    margin: auto;
 }
 
 #level {
