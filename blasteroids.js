@@ -25,12 +25,12 @@ async function startLevel() {
     await gameLoop(spawn_interval, spawn_number);
 
     // 20 levels or if player dies return
-    setTimeout(function () {
-        if(level === 20 || health <= 0){
+    setTimeout(function() {
+        if (level === 20 || health <= 0) {
             return;
         }
         level += 1;
-        
+
         score += 1000;
         // displays current score when level cleared
         updateScoreDisplay();
@@ -50,7 +50,7 @@ async function gameLoop(spawn_interval, spawn_number) {
     while (health > 0 && level <= 20) {
         context.clearRect(0, 0, 700, 700);
 
-        
+
         asteroids.forEach(function(v) {
             //draws each asteroid
             v.detectCollision(ship);
@@ -135,7 +135,11 @@ class Asteroid {
 
             health -= 1;
             delete asteroids[asteroids.indexOf(this)];
-            document.getElementsByClassName("healthBar")[health].style.visibility = "hidden";
+            // $(".healthBar").eq(3 - health).css("margin-right", "100px");
+            $(".healthBar").eq(3 - health).css("animation-name", "slideOut");
+            $(".healthBar").eq(3 - health).css("animation-duration", "3s");
+            $(".healthBar").eq(3 - health).css("animation-iteration-count", 1);
+            // document.getElementsByClassName("healthBar")[health].style.visibility = "hidden";
         }
     }
 }
@@ -354,4 +358,4 @@ window.onload = function() {
 
 //         }
 //     }
-// }
+//

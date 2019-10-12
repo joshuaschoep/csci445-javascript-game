@@ -3,6 +3,16 @@
     padding: 0;
 }
 
+@keyframes slideOut {
+    0% {
+        background-color: yellow;
+    }
+    100% {
+        background-color: red;
+        visibility: hidden;
+    }
+}
+
 @keyframes colorChanger {
     5% {
         color: #fff;
@@ -102,7 +112,8 @@ canvas#game-window {
     background-color: yellow;
     float: left;
     width: 5%;
-    height: 10px
+    height: 10px;
+    animation-fill-mode: forwards;
 }
 
 footer {
