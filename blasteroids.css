@@ -71,7 +71,8 @@ h2{
 
 section.game{
     clear: both;
-    padding: 50px;
+    margin: 50px;
+    overflow: hidden;
 }
 
 #levelcount{
@@ -101,4 +102,19 @@ canvas#game-window{
     float: left;
     width: 5%;
     height: 10px
+}
+
+footer{
+    clear: both;
+	margin-top: 20px;
+	text-align: center;
+	overflow: hidden;
+	background-color: var(--background-primary);
+	color: #fff;
+	padding-top: 20px;
+	display: block;
+}
+
+footer table{
+	margin: auto;
 }
