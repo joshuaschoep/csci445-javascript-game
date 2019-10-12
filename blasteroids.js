@@ -18,18 +18,33 @@ async function startLevel() {
     spawn_timer = 0;
     spawn_counter = 0;
     asteroids = [];
+    // displays level 1 when game starts and increments when level cleared
+    updateLevelDisplay();
+    // displays score of 0 when game starts
+    updateScoreDisplay();
     await gameLoop(spawn_interval, spawn_number);
 
+    // 20 levels or if player dies return
     setTimeout(function () {
         if(level === 20 || health <= 0){
             return;
         }
         level += 1;
+        
         score += 1000;
+        // displays current score when level cleared
+        updateScoreDisplay();
         startLevel();
     })
 }
 
+function updateLevelDisplay() {
+    $("#level").text("Level: " + level);
+}
+
+function updateScoreDisplay() {
+    $('#score').text("Score: " + score);
+}
 
 async function gameLoop(spawn_interval, spawn_number) {
     while (health > 0 && level <= 20) {
@@ -292,6 +307,8 @@ class Laser {
                 delete lasers[lasers.indexOf(this)];
 
                 score += 100;
+                // updates displayed score when asteroid is destroyed
+                updateScoreDisplay();
 
 
             }

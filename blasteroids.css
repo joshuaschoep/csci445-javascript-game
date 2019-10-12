@@ -118,3 +118,17 @@ footer{
 footer table{
 	margin: auto;
 }
+
+#level {
+    margin-top: 10px;
+    font-size: 150%;
+    display: block;
+    color: white;
+}
+
+#score {
+    margin-top: 10px;
+    font-size: 150%;
+    display: block;
+    color: white;
+}
