@@ -9,6 +9,9 @@ We also struggled with keeping track of variables and other typing in the class 
 due to JavaScripts weak (or nonexistant) typing. There's also no real inheritance in JavaScript, so our
 code struggled a bit with keeping everything in order.
 
+I was personally really proud of our use on the CSS3 styling of the health bars. I think the use of a color fade and
+then disappear for the bars looked really cool and also made sense for the game.
+
 Our project should be worth 100 points because we implemented some complex features of javascript, html, and css
 into a coherent and visually appealing web-based game. We found workarounds to common javascript issues like async,
 callbacks, objects and classes/inheritence, and game mechanics like event-ticks and collision systems.
