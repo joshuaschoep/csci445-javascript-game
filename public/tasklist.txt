@@ -1,0 +1,35 @@
+CSCI445 JavaScript Task List
+
+1. Page layout (JS)
+	- Canvas (JS)
+	- Start/stop(?) game
+	- Space allocated for scoreboard
+	- Needs 3 CSS3 features
+		- Button changes on hover/something?
+			- We have nice sprites for buttons if we want
+		- Animated title?
+		- Animation for advancing a level?
+2. Level structure (NT)
+	- Keep track of scores
+	- When to advance to next level
+	- Generating asteroids
+3. Asteroids (TL)
+	- Random generation on a per level basis
+		 - Higher level = more faster asteroids
+	- Sprite (SR)
+	- Interactions with spaceship, lasers
+3. Bonus point items (TL)
+	- Same as asteroids
+3. Spaceship (SR)
+	- Cool sprite (SR)
+	- Keyboard movement
+	- Has x num of lives that get taken away when hit blasteroid
+4. Spaceship shoots lasers (SR / Anyone)
+	- Laser/asteroid interaction
+	- Laser sprite (SR)
+5. Implement High Score API (NT)
+	- High Score table displayed on page
+	
+Game Overview
+- Spaceship moves cardinal directions, shoots up
+- Asteroids come in from the top of screen

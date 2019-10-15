@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang='en-us'>
+
+<head>
+    <title>Blasteroids</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="blasteroids.css">
+    <link rel="stylesheet" type="text/css" href="highscore.css">
+    <link rel="icon" href="thumbnail.png">
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="HighscoreAPI.js"></script>
+</head>
+
+<body>
+<header>
+    <img src="thumbnail.png" alt="Blasteroids! logo" height="40">
+    <h1>Blasteroids!</h1>
+    <h2>A game for all computer scientists</h2>
+</header>
+<section class="game">
+    <ul>
+        <li>
+            <div class="healthBar"></div>
+        </li>
+        <li>
+            <div class="healthBar"></div>
+        </li>
+        <li>
+            <div class="healthBar"></div>
+        </li>
+        <li>
+            <div class="healthBar"></div>
+        </li>
+    </ul>
+    
+    <canvas id="game-window"></canvas>
+    <div id="scoreboard-window">
+        <div id="highdiv">
+            <table id="hightable">
+                <tr>
+                    <th>User</th>
+                    <th>Score</th>
+                </tr>
+            </table>
+            <table id="myhightable">
+                <tr>
+                    <th colspan="2">Your High Score</th>
+                </tr>
+                <tr id="myhighscore">
+                    <td colspan="2">You don't have one yet!</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <p id="level">Level: </p>
+    <p id="score">Score: </p>
+</section>
+<script src="blasteroids.js"></script>
+<footer>
+    <table>
+        <tr>
+            <td>
+                <img src="http://www.w3.org/html/logo/badge/html5-badge-h-semantics.png" width="auto" height="32" alt="Powered by HTML5" title="Powered by HTML5">
+            </td>
+            <td>
+                <img src="http://www.w3.org/Icons/valid-css.png" height="20px" alt="Powered by CSS3" title="Powered by CSS3">
+            </td>
+            <td>
+                <img src="http://www.w3.org/WAI/wcag2A" height="20px" alt="WCAG A Conformance" title="WCAG A Conformance">
+            </td>
+        </tr>
+    </table>
+</footer>
+</body>
+
+</html>
